@@ -11,6 +11,7 @@ export class AmplifyAuthenticator {
 
   @State() authState: AuthState = AuthState.LoggedOut;
   @State() userData: UserData = {};
+  @State() validationErrors: string;
   @Event() authStateChange: EventEmitter;
 
   @Watch('authState')
@@ -34,9 +35,11 @@ export class AmplifyAuthenticator {
 
     console.log('amplify-authenticator signIn', this.creds);
     if (!this.creds.username || !this.creds.password) {
-      // TODO: show errors
+      this.validationErrors = 'empty fields';
       return;
     }
+
+    this.validationErrors = null;
 
     // TODO: sign-in using Amplify Auth module
 
@@ -56,7 +59,7 @@ export class AmplifyAuthenticator {
       handleUsernameChange: this.handleUsernameChange,
       handlePasswordChange: this.handlePasswordChange,
     };
-    const signInProps = { handleSubmit: this.handleSignInSubmit };
+    const signInProps = { handleSubmit: this.handleSignInSubmit, validationErrors: this.validationErrors };
     const contentProps = { ...this.userData, signOut: this.handleSignOut };
     return (
       <Tunnel.Provider state={tunnerState}>

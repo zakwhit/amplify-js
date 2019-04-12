@@ -5,6 +5,7 @@ import { Component, Prop } from '@stencil/core';
 })
 export class AmplifySignIn {
   @Prop() handleSubmit: (Event) => void;
+  @Prop() validationErrors: string;
 
   render() {
     return (
@@ -18,6 +19,7 @@ export class AmplifySignIn {
             <amplify-sign-in-password-field />
           </p>
         </div>
+        {this.validationErrors && <p>{this.validationErrors}</p>}
         <amplify-button type="submit">Submit</amplify-button>
       </form>
     );

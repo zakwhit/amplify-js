@@ -86,9 +86,11 @@ export namespace Components {
 
   interface AmplifySignIn {
     'handleSubmit': (Event) => void;
+    'validationErrors': string;
   }
   interface AmplifySignInAttributes extends StencilHTMLAttributes {
     'handleSubmit'?: (Event) => void;
+    'validationErrors'?: string;
   }
 
   interface AmplifyTextField {

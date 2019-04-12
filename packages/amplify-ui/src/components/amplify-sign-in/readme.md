@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property       | Attribute | Description | Type                   | Default     |
-| -------------- | --------- | ----------- | ---------------------- | ----------- |
-| `handleSubmit` | --        |             | `(Event: any) => void` | `undefined` |
-| `theme`        | `theme`   |             | `any`                  | `undefined` |
+| Property           | Attribute           | Description | Type                   | Default     |
+| ------------------ | ------------------- | ----------- | ---------------------- | ----------- |
+| `handleSubmit`     | --                  |             | `(Event: any) => void` | `undefined` |
+| `validationErrors` | `validation-errors` |             | `string`               | `undefined` |
 
 
 ----------------------------------------------

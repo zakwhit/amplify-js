@@ -33,6 +33,7 @@ export class RockPaperScissor {
   @Element() el: HTMLElement;
 
   @Prop() icon: Function;
+
   @State() currentIcon: Icon = getRandomIcon();
   @Event() change: EventEmitter;
 

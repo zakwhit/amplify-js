@@ -24,9 +24,7 @@ export class AmplifyTextField {
         <div>
           <input
             id={this.fieldId}
-            aria-describedby={
-              this.fieldId && this.description ? `${this.fieldId}-description` : null
-            }
+            aria-describedby={this.fieldId && this.description ? `${this.fieldId}-description` : null}
             type="text"
             {...this.inputProps}
           />
