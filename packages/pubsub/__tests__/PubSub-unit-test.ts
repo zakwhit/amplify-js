@@ -56,7 +56,7 @@ const spyon = jest.spyOn(Credentials, 'get').mockImplementation(() => {
 });
 
 const testPubSubAsync = (pubsub, topic, message, options?) =>
-	new Promise((resolve, reject) => {
+	new Promise(async (resolve, reject) => {
 		const obs = pubsub.subscribe(topic, options).subscribe({
 			next: data => {
 				expect(data.value).toEqual(message);
@@ -67,7 +67,7 @@ const testPubSubAsync = (pubsub, topic, message, options?) =>
 			error: reject,
 		});
 
-		pubsub.publish(topic, message, options);
+		await pubsub.publish(topic, message, options);
 	});
 
 const testAppSyncAsync = (pubsub, topic, message) =>
@@ -108,6 +108,10 @@ const testAppSyncAsync = (pubsub, topic, message) =>
 		const testClient = new Paho.Client(testUrl, testClientId);
 		testClient.send(topic, JSON.stringify({ data: { testKey: message } }));
 	});
+
+afterEach(() => {
+	jest.restoreAllMocks();
+});
 
 describe('PubSub', () => {
 	describe('constructor test', () => {
@@ -345,7 +349,7 @@ describe('PubSub', () => {
 
 			expect(
 				pubsub.publish('topicA', 'my message AWSIoTProvider')
-			).rejects.toThrowError('Failed to publish');
+			).rejects.toMatch('Failed to publish');
 		});
 
 		test('On unsubscribe when is the last observer it should disconnect the websocket', async () => {
@@ -379,6 +383,7 @@ describe('PubSub', () => {
 			expect(spyDisconnect).toHaveBeenCalled();
 			spyDisconnect.mockClear();
 		});
+
 		test(
 			'For multiple observers, client should not be disconnected if there are ' +
 				'other observers connected when unsubscribing',
