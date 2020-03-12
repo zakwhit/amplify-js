@@ -11,10 +11,10 @@ export interface ISignUpField {
 
 export default [
 	{
-		label: 'Username',
+		label: 'Email',
 		key: 'username',
 		required: true,
-		placeholder: 'Username',
+		placeholder: 'Email',
 		displayOrder: 1,
 	},
 	{
